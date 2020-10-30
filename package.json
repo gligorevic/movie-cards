@@ -38,6 +38,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "prop-types": "^15.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"

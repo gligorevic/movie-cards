@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 
 import MovieCard from './MovieCard';
 
-const getMovies = movies => (
-  <div className="card-deck">
-    {movies.map(movie => (
-      <MovieCard key={movie.id} movie={movie} />
-    ))}
-  </div>
-);
-
-const MovieList = ({ movies }) => <div>{getMovies(movies)}</div>;
+const MovieList = ({ movies, openAddDialog, deleteMovie }) => {
+  return (
+    <div className="card-deck">
+      {movies.map(movie => (
+        <MovieCard key={movie.id} movie={movie} deleteMovie={() => deleteMovie(movie.id)} />
+      ))}
+      <div className="movie-card" onClick={openAddDialog}>
+        <div className="movie-card card movie-add">
+          <div className="movie-add__plus">&#43;</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 MovieList.defaultProps = {
   movies: [],
@@ -19,6 +24,8 @@ MovieList.defaultProps = {
 
 MovieList.propTypes = {
   movies: PropTypes.array,
+  openAddDialog: PropTypes.func,
+  deleteMovie: PropTypes.func,
 };
 
 export default MovieList;

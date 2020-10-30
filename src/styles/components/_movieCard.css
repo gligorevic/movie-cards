@@ -1,14 +1,50 @@
 .movie-card {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    max-width: 300px;
-    width: 300px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  max-width: 300px;
+  width: 300px;
 }
 
 .movie-card.card {
-    height: 450px;
+  height: 450px;
 }
 
+.movie-card__icon--delete {
+  height: 2rem;
+
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.movie-card:hover .movie-card__icon--delete svg {
+  fill: red;
+  transform: scale(1.2);
+  transition: all 0.5s;
+}
 .card-footer-badge {
-    font-size: 1rem;
+  font-size: 1rem;
+}
+
+.movie-add {
+  box-shadow: 0px 0rem 1.5rem rgba(51, 136, 2, 0.658);
+  position: relative;
+  cursor: pointer;
+}
+
+.movie-add__plus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4.5rem;
+  color: rgba(51, 136, 2, 0.658);
+  opacity: 0.9;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.movie-add:hover .movie-add__plus {
+  opacity: 1;
+  transform: translate(-50%, -60%) scale(1.1);
 }
