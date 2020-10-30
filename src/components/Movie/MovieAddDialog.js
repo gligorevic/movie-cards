@@ -3,7 +3,7 @@ import { useForm } from '../../hooks/useForm';
 import PropTypes from 'prop-types';
 
 function MovieAddDialog({ closeAddDialog, addNewMovie }) {
-  const [{ title, subtitle, description, year, imageUrl }, handleChange] = useForm({
+  const [{ title, subtitle, description, year, imageUrl, changedValues }, handleChange] = useForm({
     title: '',
     subtitle: '',
     description: '',
@@ -31,9 +31,11 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
             name="imageUrl"
             onChange={handleChange}
             value={imageUrl}
-            required
+            required={changedValues.includes('imageUrl')}
           />
-          {imageUrl.length === 0 && <div className="invalid-feedback">Please enter a image url.</div>}
+          {changedValues.includes('imageUrl') && imageUrl.length === 0 && (
+            <div className="invalid-feedback">Please enter a image url.</div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="Title">Title</label>
@@ -44,9 +46,11 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
             name="title"
             onChange={handleChange}
             value={title}
-            required
+            required={changedValues.includes('title')}
           />
-          {title.length === 0 && <div className="invalid-feedback">Please enter a title.</div>}
+          {changedValues.includes('title') && title.length === 0 && (
+            <div className="invalid-feedback">Please enter a title.</div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="Subtitle">Subtitle</label>
@@ -57,9 +61,11 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
             name="subtitle"
             onChange={handleChange}
             value={subtitle}
-            required
+            required={changedValues.includes('subtitle')}
           />
-          {subtitle.length === 0 && <div className="invalid-feedback">Please enter a subtitle.</div>}
+          {changedValues.includes('subtitle') && subtitle.length === 0 && (
+            <div className="invalid-feedback">Please enter a subtitle.</div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="Description">Description</label>
@@ -70,9 +76,11 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
             name="description"
             onChange={handleChange}
             value={description}
-            required
+            required={changedValues.includes('description')}
           />
-          {description.length === 0 && <div className="invalid-feedback">Please enter a description.</div>}
+          {changedValues.includes('description') && description.length === 0 && (
+            <div className="invalid-feedback">Please enter a description.</div>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="Year">Year</label>
@@ -83,9 +91,11 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
             name="year"
             onChange={handleChange}
             value={year}
-            required
+            required={changedValues.includes('year')}
           />
-          {year === '' && <div className="invalid-feedback">Please enter a year.</div>}
+          {changedValues.includes('year') && year === '' && (
+            <div className="invalid-feedback">Please enter a year.</div>
+          )}
         </div>
         <button
           type="submit"
