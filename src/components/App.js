@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Header from './Header';
 import Movies from './Movie/Movies';
+import { RatingsProvider } from '../context/rating.context';
 
 export default class App extends Component {
   state = {
@@ -13,7 +14,9 @@ export default class App extends Component {
       <div>
         <Header title={this.state.title} />
         <div className="mt-5">
-          <Movies />
+          <RatingsProvider>
+            <Movies />
+          </RatingsProvider>
         </div>
       </div>
     );
