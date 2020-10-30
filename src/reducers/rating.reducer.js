@@ -10,6 +10,8 @@ const reducer = (state, action) => {
             }
           : movie
       );
+    case 'ADD_NEW_MOVIE':
+      return [...state, { ...action.payload, ratings: [], avg: 0 }];
     case 'DELETE_MOVIE':
       return state.filter(rating => rating.id !== action.payload);
     default:

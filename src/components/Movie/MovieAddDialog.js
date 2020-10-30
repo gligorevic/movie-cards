@@ -3,16 +3,17 @@ import { useForm } from '../../hooks/useForm';
 import PropTypes from 'prop-types';
 
 function MovieAddDialog({ closeAddDialog, addNewMovie }) {
-  const [{ title, subtitle, description, year }, handleChange] = useForm({
+  const [{ title, subtitle, description, year, imageUrl }, handleChange] = useForm({
     title: '',
     subtitle: '',
     description: '',
     year: '',
+    imageUrl: '',
   });
 
   const handleSubmit = e => {
     e.preventDefault();
-    addNewMovie({ title, subtitle, description, year, rating: 0 });
+    addNewMovie({ title, subtitle, description, year, rating: 0, imageUrl });
   };
 
   return (
@@ -21,6 +22,19 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
         &#10006;
       </div>
       <form onSubmit={handleSubmit} className="was-validated">
+        <div className="form-group">
+          <label htmlFor="imageUrl">Image url</label>
+          <input
+            type="text"
+            className="form-control is-invalid"
+            id="imageUrl"
+            name="imageUrl"
+            onChange={handleChange}
+            value={imageUrl}
+            required
+          />
+          {imageUrl.length === 0 && <div className="invalid-feedback">Please enter a image url.</div>}
+        </div>
         <div className="form-group">
           <label htmlFor="Title">Title</label>
           <input
@@ -76,7 +90,13 @@ function MovieAddDialog({ closeAddDialog, addNewMovie }) {
         <button
           type="submit"
           className="btn btn-primary"
-          disabled={title.length === 0 || subtitle.length === 0 || description.length === 0 || year === ''}
+          disabled={
+            title.length === 0 ||
+            subtitle.length === 0 ||
+            description.length === 0 ||
+            year === '' ||
+            imageUrl.length === 0
+          }
         >
           Submit
         </button>

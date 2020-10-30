@@ -1,12 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import MovieList from './MovieList';
 import MovieService from '../../services/MovieService';
 import MovieAddDialog from './MovieAddDialog';
+import { DispatchContext } from '../../context/rating.context';
 
 export default () => {
   const [movies, setMovies] = useState([]);
   const [openAddDialog, setOpenAddDialog] = useState(false);
+  const dispatch = useContext(DispatchContext);
 
   useEffect(() => {
     setMovies(MovieService.getMovies());
@@ -21,15 +23,16 @@ export default () => {
   }, [setOpenAddDialog]);
 
   const addNewMovie = useCallback(movie => {
-    setMovies(movies => [
-      ...movies,
-      { id: movies[movies.length - 1].id + 100, ...movie, imageUrl: '../images/Kingsglaive_Final_Fantasy_XV.jpg' },
-    ]);
+    const id = movies[movies.length - 1].id + 100;
+    dispatch({ type: 'ADD_NEW_MOVIE', payload: { id } });
+    setMovies(movies => [...movies, { id, ...movie }]);
+
     setOpenAddDialog(false);
   });
 
   const deleteMovie = useCallback(id => {
     setMovies(movies.filter(m => m.id !== id));
+    dispatch({ type: 'DELETE_MOVIE', payload: id });
   });
 
   return (
